@@ -74,3 +74,27 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 ### Render app 
 
 - since heroku is not availabe iam using render app
+
+
+
+# Housing folder :
+
+- package for project
+
+- __init__.py - converts the housing folder into packages
+
+- required packages
+
+- exception - to print the error in the file
+
+- logger - to keep the log or track the project
+
+- pipeline - combination of every component
+
+- config - the input to the every pipeline component
+
+- entity - the output of the each pipeline component
+
+- components - each stages of the pipeline
+
+- every folder should contaion __init_-file.
