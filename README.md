@@ -39,3 +39,18 @@ The data contains information from the 1990 California census. So although it ma
 
 4. pycharm or vs code
 
+
+### create environment
+
+conda create -p venv python==3.7 -y
+
+
+### activate environment
+
+conda activate venv/
+
+# create requirements.txt
+
+pip install - r requriements.txt
+
+
