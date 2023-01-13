@@ -58,8 +58,13 @@ pip install - r requriements.txt
 ### Docker file
 
 FROM python:3.7    - os
+
 COPY . /app        - app
+
 WORKDIR /app       - working directory   
+
 RUN pip install -r requirements.txt  - install requirements
+
 EXPOSE $PORT  - port number sent from the environment
+
 CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app  
