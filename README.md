@@ -97,4 +97,4 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 
 - components - each stages of the pipeline
 
-- every folder should contaion __init_-file.
+- every folder should contaion __init__ file.
