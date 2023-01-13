@@ -1,5 +1,5 @@
 from flask import Flask
-from housing.logger import logging
+import sys
 
 app = Flask(__name__)
 
@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 @app.route('/',methods = ['GET','POST'])
 def index():
-    logging.info('we are testing logging')
     return 'starting project'
 
 
