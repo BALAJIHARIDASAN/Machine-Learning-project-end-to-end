@@ -68,3 +68,9 @@ RUN pip install -r requirements.txt  - install requirements
 EXPOSE $PORT  - port number sent from the environment
 
 CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app  
+
+
+
+### Render app 
+
+- since heroku is not availabe iam using render app
