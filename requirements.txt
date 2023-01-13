@@ -1,3 +1,11 @@
 Flask
 flask
 gunicorn
+-e . 
+typing
+sklearn
+pandas
+numpy
+matplotlib
+seaborn
+
