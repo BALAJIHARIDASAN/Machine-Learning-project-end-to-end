@@ -107,7 +107,7 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 
 
 
-### Pipline:
+### Pipline :
 
 1. **Data Ingestion :**
 
@@ -121,7 +121,7 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
     
     - Outliers check
 
-    - duplicate Values
+    - Duplicate Values
 
     - NUll value check
 
