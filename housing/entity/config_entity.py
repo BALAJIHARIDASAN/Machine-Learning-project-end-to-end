@@ -22,3 +22,8 @@ ModelPusherConfig = namedtuple("ModelPusherConfig", ["export_dir_path"])
 
 TrainingPipelineConfig = namedtuple("TrainingPipelineConfig", ["artifact_dir"])                             
                                                                # folder for all atrifact
+
+
+
+# information are provided through yaml file and create object for all steps for pipeline
+
