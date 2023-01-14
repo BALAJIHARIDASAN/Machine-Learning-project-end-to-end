@@ -129,17 +129,30 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 
     - Domain values
 
-    - Data drift
+    - Data drift -  the statistics of old and new data is different
 
     - Imbalanced dataset
 
-
-
 3. Data Transformation
+
+    - Perform EDA to understand the data
+
+    - Perform Feature engineering (Pickle)
+
 
 4. Model Training
 
+    - Model selection  (pickle)
+
+    - Hyperparamter tuning
+
 5. Model Evaluation
+
+    - Model comparsion 
+
 
 6. Model pushing
 
+    - Model deployement
+
+    
