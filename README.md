@@ -111,9 +111,9 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 
 1. Data Ingestion
 
-    - bring data into system from multiple resources
+    - Bring data into system from multiple resources
 
-    - split data into traina and test data
+    - Split data into traina and test data
 
 2. Data validation
     
@@ -148,11 +148,10 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 
 5. Model Evaluation
 
-    - Model comparsion 
+    - Model comparsion  - Compare the performance of  old model to new model( set some threshold)
 
 
 6. Model pushing
 
     - Model deployement
 
-    
