@@ -104,3 +104,22 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 - components - each stages of the pipeline
 
 - every folder should contaion __init__ file.
+
+
+
+### Pipline
+
+1. Data Ingestion
+
+    - bring data into system from multiple resources
+
+2. Data valodation
+
+3. Data Transformation
+
+4. Model Training
+
+5. Model Evaluation
+
+6. Model pushing
+
