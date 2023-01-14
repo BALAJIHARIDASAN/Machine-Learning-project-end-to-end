@@ -1,10 +1,11 @@
 training_pipeline_config: 
-  pipeline_name: housing 
-  artifact_dir: artifact
+  pipeline_name: housing  # Name of pipeline
+  artifact_dir: artifact  # location of artifact file
+
 
 data_ingestion_config:
-  dataset_download_url: https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.tgz
-  raw_data_dir: raw_data
+  dataset_download_url: https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.tgz # url for dataset
+  raw_data_dir: raw_data     
   tgz_download_dir: tgz_data
   ingested_dir: ingested_data
   ingested_train_dir: train
@@ -18,7 +19,6 @@ data_validation_config:
   schema_file_name: schema.yaml
   report_file_name: report.json
   report_page_file_name: report.html
-
 data_transformation_config:
   add_bedroom_per_room: true
   transformed_dir: transformed_data

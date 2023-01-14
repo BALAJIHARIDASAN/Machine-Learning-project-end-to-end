@@ -103,6 +103,10 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 
 - components - each stages of the pipeline
 
+- Util  - helper function 
+
+- constant  - the variable that need for housing folder
+
 - every folder should contaion __init__ file.
 
 
