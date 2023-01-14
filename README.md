@@ -107,15 +107,15 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 
 
 
-### Pipline
+### Pipline:
 
-1. **Data Ingestion**
+1. **Data Ingestion :**
 
     - Bring data into system from multiple resources
 
     - Split data into traina and test data
 
-2. **Data validation**
+2. **Data validation :**
     
     - Data Range
     
@@ -133,25 +133,25 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 
     - Imbalanced dataset
 
-3. **Data Transformation**
+3. **Data Transformation :**
 
     - Perform EDA to understand the data
 
     - Perform Feature engineering (Pickle)
 
 
-4. **Model Training**
+4. **Model Training :**
 
     - Model selection  (pickle)
 
     - Hyperparamter tuning
 
-5. **Model Evaluation**
+5. **Model Evaluation :**
 
     - Model comparsion  - Compare the performance of  old model to new model( set some threshold)
 
 
-6. **Model pushing**
+6. **Model pushing :**
 
     - Model deployement
 
