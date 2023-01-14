@@ -113,7 +113,27 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 
     - bring data into system from multiple resources
 
-2. Data valodation
+    - split data into traina and test data
+
+2. Data validation
+    
+    - Data Range
+    
+    - Outliers check
+
+    - duplicate Values
+
+    - NUll value check
+
+    - Schema validation
+
+    - Domain values
+
+    - Data drift
+
+    - Imbalanced dataset
+
+
 
 3. Data Transformation
 
