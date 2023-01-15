@@ -91,7 +91,7 @@ CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
 
 - required packages
 
-- exception - to print the error in the file
+- exception - to print the error details  in the project process
 
 - logger - to keep the log or track the project
 
