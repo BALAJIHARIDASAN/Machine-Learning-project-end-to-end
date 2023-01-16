@@ -1,9 +1,9 @@
 training_pipeline_config:
-  pipeline_name: housing
-  artifact_dir: artifact
+  pipeline_name: housing    # name of the pipeline
+  artifact_dir: artifact    # folder to store the all the information about the artifact
 
-data_ingestion_config:
-  dataset_download_url: https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.tgz
+data_ingestion_config:  # folder location 
+  dataset_download_url: https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.tgz  # url detail
   raw_data_dir: raw_data
   tgz_download_dir: tgz_data
   ingested_dir: ingested_data
@@ -41,3 +41,6 @@ model_evaluation_config:
 
 model_pusher_config:
   model_export_dir: saved_models
+
+
+  #these information are assigned to the entity 
