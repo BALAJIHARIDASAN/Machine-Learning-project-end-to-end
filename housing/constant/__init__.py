@@ -100,5 +100,3 @@ MODEL_PATH_KEY = "model_path"
 
 EXPERIMENT_DIR_NAME="experiment"
 EXPERIMENT_FILE_NAME="experiment.csv"
-Footer
-© 2023 GitHub, Inc.
