@@ -30,26 +30,26 @@ class DataIngestion:
             
             os.makedirs(tgz_download_dir,exist_ok=True)  # create the folder  for downloading dataset
 
-            housing_file_name = os.path.basename(download_url)  # extract the housing.tgz from the url
+            housing_file_name = os.path.basename(download_url)  # extract only the housing.tgz from the url where the dataset is present
 
             tgz_file_path = os.path.join(tgz_download_dir, housing_file_name) # create a folder with file of url file
 
             logging.info(f"Downloading file from :[{download_url}] into :[{tgz_file_path}]")
-            urllib.request.urlretrieve(download_url, tgz_file_path)   # to read the url 
+            urllib.request.urlretrieve(download_url, tgz_file_path)   # to read  and download the data from the url 
             logging.info(f"File :[{tgz_file_path}] has been downloaded successfully.")
-            return tgz_file_path
+            return tgz_file_path  # location of the dataset to be downloaded
 
         except Exception as e:
             raise HousingException(e,sys) from e
 
-    def extract_tgz_file(self,tgz_file_path:str):  # extracting  the data 
+    def extract_tgz_file(self,tgz_file_path:str):  # extracting the data 
         try:
             raw_data_dir = self.data_ingestion_config.raw_data_dir  # get the directory of raw data folder
 
-            if os.path.exists(raw_data_dir):
-                os.remove(raw_data_dir)
+            if os.path.exists(raw_data_dir): # To check whether the folder is exist or not
+                os.remove(raw_data_dir)   # remove the folder if it exist
 
-            os.makedirs(raw_data_dir,exist_ok=True)
+            os.makedirs(raw_data_dir,exist_ok=True)  # to create the folder raw data dir to save the dataset
 
             logging.info(f"Extracting tgz file: [{tgz_file_path}] into dir: [{raw_data_dir}]")
             with tarfile.open(tgz_file_path) as housing_tgz_file_obj:
