@@ -3,7 +3,7 @@ from housing.pipeline.pipeline import Pipeline
 
 
 def main():
-    pipeline = Pipeline
+    pipeline = Pipeline()
     pipeline.run_pipeline()
 
 

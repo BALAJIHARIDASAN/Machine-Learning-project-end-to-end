@@ -25,7 +25,7 @@ class Configuartion:
 
 
 # data ingestion configuration 
-def get_data_ingestion_config(self) ->DataIngestionConfig:
+    def get_data_ingestion_config(self) ->DataIngestionConfig:
         try:
             artifact_dir = self.training_pipeline_config.artifact_dir
             data_ingestion_artifact_dir=os.path.join(
@@ -86,7 +86,7 @@ def get_data_ingestion_config(self) ->DataIngestionConfig:
 
 # training pipeline variable will be availble from the constant folder
 
-def get_training_pipeline_config(self) ->TrainingPipelineConfig:
+    def get_training_pipeline_config(self) ->TrainingPipelineConfig:
         try:
             training_pipeline_config = self.config_info[TRAINING_PIPELINE_CONFIG_KEY]
             artifact_dir = os.path.join(ROOT_DIR,

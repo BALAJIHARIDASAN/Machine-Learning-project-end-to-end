@@ -65,7 +65,7 @@ class DataIngestion:
 
             file_name = os.listdir(raw_data_dir)[0]  # To get the file name from the list
 
-            housing_file_path = os.path.join(raw_data_dir,file_name)   # directory for complete file path
+            housing_file_path = os.path.join(raw_data_dir,file_name)   # directory for complete file path that need to split
 
 
             logging.info(f"Reading csv file: [{housing_file_path}]")
@@ -84,7 +84,7 @@ class DataIngestion:
 
             split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=121)  # spliting the dataset
 
-            for train_index,test_index in split.split(housing_data_frame, housing_data_frame["income_cat"]):
+            for train_index,test_index in split.split(housing_data_frame, housing_data_frame["income_cat"]): # ration that split happens will always have same proportion
                 strat_train_set = housing_data_frame.loc[train_index].drop(["income_cat"],axis=1)  # extract the row wise data using values
                 strat_test_set = housing_data_frame.loc[test_index].drop(["income_cat"],axis=1)  # extract the row wise data using values
   

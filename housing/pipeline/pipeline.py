@@ -10,12 +10,12 @@ from housing.entity.config_entity import *
 
 from housing.component.data_ingestion import *
 
-import os, sys
+import os,sys
 
 class Pipeline:
 
 
-    def __init__(self,config:Configuartion= Configuartion())-> None:
+    def __init__(self,config:Configuartion= Configuartion()):
         try:
             self.config = config
 
@@ -35,7 +35,7 @@ class Pipeline:
 
 
 
-    def run_pipeline(self):
+    def run_pipeline(self):  # to call the pipeline
         try:
             data_ingestion_artifact = self.start_date_ingestion()
         except Exception as e:
