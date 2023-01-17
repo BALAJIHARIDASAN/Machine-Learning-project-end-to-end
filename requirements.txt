@@ -1,7 +1,10 @@
-flask
+numpy
+Flask
 gunicorn
-scikit-learn
+sklearn
 pandas
 PyYAML
+evidently
 dill
+matplotlib
 -e .
