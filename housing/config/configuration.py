@@ -103,12 +103,12 @@ class Configuartion:
 
             report_file_path = os.path.join(data_validation_artifact_dir,
             data_validation_config[DATA_VALIDATION_REPORT_FILE_NAME_KEY]
-            )  # creating the report folder in the directory
+            )  # creating the schema folder in the directory
 
             report_page_file_path = os.path.join(data_validation_artifact_dir,
             data_validation_config[DATA_VALIDATION_REPORT_PAGE_FILE_NAME_KEY]
 
-            )  # creating the replort html folder in the directory
+            )  # creating the schema folder in the
 
             data_validation_config = DataValidationConfig(
                 schema_file_path=schema_file_path,
