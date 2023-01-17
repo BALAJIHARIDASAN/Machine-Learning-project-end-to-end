@@ -1,6 +1,6 @@
 flask
 gunicorn
-sklearn
+scikit-learn
 pandas
 PyYAML
 dill

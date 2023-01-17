@@ -28,7 +28,7 @@ class DataIngestion:
             #folder location to download file
             tgz_download_dir = self.data_ingestion_config.tgz_download_dir
             
-            os.makedirs(tgz_download_dir,exist_ok=True)  # create the folder 
+            os.makedirs(tgz_download_dir,exist_ok=True)  # create the folder  for downloading dataset
 
             housing_file_name = os.path.basename(download_url)  # extract the housing.tgz from the url
 
