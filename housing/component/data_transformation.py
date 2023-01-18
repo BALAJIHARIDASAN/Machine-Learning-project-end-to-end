@@ -30,7 +30,7 @@ from housing.util.util import read_yaml_file,save_object,save_numpy_array_data,l
 #   income_cat: float
 
 
-class FeatureGenerator(BaseEstimator, TransformerMixin):
+class FeatureGenerator(BaseEstimator, TransformerMixin):  # inheriting the class from the sklearn library
 
     def __init__(self, add_bedrooms_per_room=True,
                  total_rooms_ix=3,
@@ -48,9 +48,9 @@ class FeatureGenerator(BaseEstimator, TransformerMixin):
         try:
             self.columns = columns
             if self.columns is not None:
-                total_rooms_ix = self.columns.index(COLUMN_TOTAL_ROOMS)
-                population_ix = self.columns.index(COLUMN_POPULATION)
-                households_ix = self.columns.index(COLUMN_HOUSEHOLDS)
+                total_rooms_ix = self.columns.index(COLUMN_TOTAL_ROOMS)   # calculate total number of room
+                population_ix = self.columns.index(COLUMN_POPULATION)     # population of the each house
+                households_ix = self.columns.index(COLUMN_HOUSEHOLDS)     # 
                 total_bedrooms_ix = self.columns.index(COLUMN_TOTAL_BEDROOM)
 
             self.add_bedrooms_per_room = add_bedrooms_per_room
@@ -69,15 +69,15 @@ class FeatureGenerator(BaseEstimator, TransformerMixin):
             room_per_household = X[:, self.total_rooms_ix] / \
                                  X[:, self.households_ix]
             population_per_household = X[:, self.population_ix] / \
-                                       X[:, self.households_ix]
-            if self.add_bedrooms_per_room:
+                                       X[:, self.households_ix]  
+            if self.add_bedrooms_per_room:  
                 bedrooms_per_room = X[:, self.total_bedrooms_ix] / \
                                     X[:, self.total_rooms_ix]
                 generated_feature = np.c_[
-                    X, room_per_household, population_per_household, bedrooms_per_room]
+                    X, room_per_household, population_per_household, bedrooms_per_room] # if it true then new columns will be added # concatination
             else:
                 generated_feature = np.c_[
-                    X, room_per_household, population_per_household]
+                    X, room_per_household, population_per_household]  # concatinating the columns 
 
             return generated_feature
         except Exception as e:
@@ -106,12 +106,12 @@ class DataTransformation:
 
     def get_data_transformer_object(self)->ColumnTransformer:
         try:
-            schema_file_path = self.data_validation_artifact.schema_file_path
+            schema_file_path = self.data_validation_artifact.schema_file_path  # reading schema file path
 
-            dataset_schema = read_yaml_file(file_path=schema_file_path)
+            dataset_schema = read_yaml_file(file_path=schema_file_path)  # reading the dataset
 
-            numerical_columns = dataset_schema[NUMERICAL_COLUMN_KEY]
-            categorical_columns = dataset_schema[CATEGORICAL_COLUMN_KEY]
+            numerical_columns = dataset_schema[NUMERICAL_COLUMN_KEY]  # generating numerical columns
+            categorical_columns = dataset_schema[CATEGORICAL_COLUMN_KEY]  # generating categorical columns
 
 
             num_pipeline = Pipeline(steps=[
@@ -122,24 +122,24 @@ class DataTransformation:
                 )),
                 ('scaler', StandardScaler())
             ]
-            )
+            )   # creating the pipeline for numerical columns
 
             cat_pipeline = Pipeline(steps=[
                  ('impute', SimpleImputer(strategy="most_frequent")),
                  ('one_hot_encoder', OneHotEncoder()),
                  ('scaler', StandardScaler(with_mean=False))
             ]
-            )
+            )  # creating the pipeline for categorical columns
 
             logging.info(f"Categorical columns: {categorical_columns}")
             logging.info(f"Numerical columns: {numerical_columns}")
 
 
             preprocessing = ColumnTransformer([
-                ('num_pipeline', num_pipeline, numerical_columns),
-                ('cat_pipeline', cat_pipeline, categorical_columns),
-            ])
-            return preprocessing
+                ('num_pipeline', num_pipeline, numerical_columns), # numerical column pipeline
+                ('cat_pipeline', cat_pipeline, categorical_columns), # categorical column pipeline
+            ])   # creating column transformer for the processing, concatination both pipeline
+            return preprocessing  # give data as the processed data
 
         except Exception as e:
             raise HousingException(e,sys) from e   
