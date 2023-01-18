@@ -15,3 +15,9 @@ DataIngestionArtifact = namedtuple("DataIngestionArtifact",
 DataValidationArtifact = namedtuple("DataValidationArtifact",
 ["schema_file_path",   "report_file_path",    "report_page_file_path",     "is_validated",                 "message"])
 # schema file path     # report file path     # report page folder path     # status of the validation      # message of the completed pipeline
+
+
+
+DataTransformationArtifact = namedtuple("DataTransformationArtifact",["is_transformed",            "message", "transformed_train_file_path",                 "transformed_test_file_path",            "preprocessed_object_file_path"])
+                                                                       # status of transformation               # file path for transformed train data      # file path for transformed test data     # path for pickle file
+
