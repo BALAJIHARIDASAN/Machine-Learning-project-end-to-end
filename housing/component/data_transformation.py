@@ -148,61 +148,61 @@ class DataTransformation:
     def initiate_data_transformation(self)->DataTransformationArtifact:
         try:
             logging.info(f"Obtaining preprocessing object.")
-            preprocessing_obj = self.get_data_transformer_object()
+            preprocessing_obj = self.get_data_transformer_object()  # reading the preprocessing object
 
 
             logging.info(f"Obtaining training and test file path.")
-            train_file_path = self.data_ingestion_artifact.train_file_path
-            test_file_path = self.data_ingestion_artifact.test_file_path
+            train_file_path = self.data_ingestion_artifact.train_file_path  # reading the train data
+            test_file_path = self.data_ingestion_artifact.test_file_path    # reading the test data
             
 
-            schema_file_path = self.data_validation_artifact.schema_file_path
+            schema_file_path = self.data_validation_artifact.schema_file_path  # reading the schema path
             
             logging.info(f"Loading training and test data as pandas dataframe.")
-            train_df = load_data(file_path=train_file_path, schema_file_path=schema_file_path)
+            train_df = load_data(file_path=train_file_path, schema_file_path=schema_file_path)  # loading the train data
             
-            test_df = load_data(file_path=test_file_path, schema_file_path=schema_file_path)
+            test_df = load_data(file_path=test_file_path, schema_file_path=schema_file_path)  # loading the test data
 
-            schema = read_yaml_file(file_path=schema_file_path)
-
-            target_column_name = schema[TARGET_COLUMN_KEY]
+            schema = read_yaml_file(file_path=schema_file_path)  # reading the dataset
+ 
+            target_column_name = schema[TARGET_COLUMN_KEY]  # creating the target data
 
 
             logging.info(f"Splitting input and target feature from training and testing dataframe.")
-            input_feature_train_df = train_df.drop(columns=[target_column_name],axis=1)
-            target_feature_train_df = train_df[target_column_name]
+            input_feature_train_df = train_df.drop(columns=[target_column_name],axis=1)  # creating the train data
+            target_feature_train_df = train_df[target_column_name] # creating the test data
 
-            input_feature_test_df = test_df.drop(columns=[target_column_name],axis=1)
-            target_feature_test_df = test_df[target_column_name]
+            input_feature_test_df = test_df.drop(columns=[target_column_name],axis=1) # test data input features
+            target_feature_test_df = test_df[target_column_name]  # test data output features
             
 
             logging.info(f"Applying preprocessing object on training dataframe and testing dataframe")
-            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
-            input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
+            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)  # preprocessing train input features
+            input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df) # preprocessing test input features
 
 
-            train_arr = np.c_[ input_feature_train_arr, np.array(target_feature_train_df)]
+            train_arr = np.c_[ input_feature_train_arr, np.array(target_feature_train_df)] # concatinating train data
 
-            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
+            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]  # concatinting test data
             
-            transformed_train_dir = self.data_transformation_config.transformed_train_dir
-            transformed_test_dir = self.data_transformation_config.transformed_test_dir
+            transformed_train_dir = self.data_transformation_config.transformed_train_dir  # path for train dataset
+            transformed_test_dir = self.data_transformation_config.transformed_test_dir  # path for test dataset
 
-            train_file_name = os.path.basename(train_file_path).replace(".csv",".npz")
-            test_file_name = os.path.basename(test_file_path).replace(".csv",".npz")
+            train_file_name = os.path.basename(train_file_path).replace(".csv",".npz")  # reading the housin.csv
+            test_file_name = os.path.basename(test_file_path).replace(".csv",".npz")  # reading the housing.csv
 
-            transformed_train_file_path = os.path.join(transformed_train_dir, train_file_name)
-            transformed_test_file_path = os.path.join(transformed_test_dir, test_file_name)
+            transformed_train_file_path = os.path.join(transformed_train_dir, train_file_name)  # path for transformed dataset
+            transformed_test_file_path = os.path.join(transformed_test_dir, test_file_name) # path for transformed dataset
 
             logging.info(f"Saving transformed training and testing array.")
             
-            save_numpy_array_data(file_path=transformed_train_file_path,array=train_arr)
-            save_numpy_array_data(file_path=transformed_test_file_path,array=test_arr)
+            save_numpy_array_data(file_path=transformed_train_file_path,array=train_arr)  # saving the output as numpy array
+            save_numpy_array_data(file_path=transformed_test_file_path,array=test_arr)  # saving the output as numpy array
 
-            preprocessing_obj_file_path = self.data_transformation_config.preprocessed_object_file_path
+            preprocessing_obj_file_path = self.data_transformation_config.preprocessed_object_file_path  # creating path for pickle file
 
             logging.info(f"Saving preprocessing object.")
-            save_object(file_path=preprocessing_obj_file_path,obj=preprocessing_obj)
+            save_object(file_path=preprocessing_obj_file_path,obj=preprocessing_obj)  # saving the pickle object
 
             data_transformation_artifact = DataTransformationArtifact(is_transformed=True,
             message="Data transformation successfull.",
@@ -210,9 +210,9 @@ class DataTransformation:
             transformed_test_file_path=transformed_test_file_path,
             preprocessed_object_file_path=preprocessing_obj_file_path
 
-            )
+            )  
             logging.info(f"Data transformationa artifact: {data_transformation_artifact}")
-            return data_transformation_artifact
+            return data_transformation_artifact  # return output in data validation aritifact
         except Exception as e:
             raise HousingException(e,sys) from e
 
