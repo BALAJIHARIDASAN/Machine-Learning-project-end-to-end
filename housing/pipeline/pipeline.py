@@ -18,6 +18,8 @@ from housing.component.data_transformation import *
 
 import os,sys
 
+from housing.component.model_trainer import *
+
 
 
 class Pipeline:
@@ -64,6 +66,15 @@ class Pipeline:
         except Exception as e:
             raise HousingException(e, sys)
 
+    def start_model_trainer(self, data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
+        try:
+            model_trainer = ModelTrainer(model_trainer_config=self.config.get_model_trainer_config(),
+                                         data_transformation_artifact=data_transformation_artifact
+                                         )
+            return model_trainer.initiate_model_trainer()
+        except Exception as e:
+            raise HousingException(e, sys) from e
+
 
     
 
@@ -73,5 +84,6 @@ class Pipeline:
             data_validation_artifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             data_transformation_artifact = self.start_data_transformation(data_ingestion_artifact=data_ingestion_artifact,
                                             data_validation_artifact=data_validation_artifact)
+            data_model
         except Exception as e:
             raise HousingException(e,sys) from e

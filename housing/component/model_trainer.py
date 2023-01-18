@@ -18,10 +18,10 @@ class HousingEstimatorModel:
         preprocessing_object: preprocessing_object
         trained_model_object: trained_model_object
         """
-        self.preprocessing_object = preprocessing_object
-        self.trained_model_object = trained_model_object
+        self.preprocessing_object = preprocessing_object  # creating the preprocessed data object
+        self.trained_model_object = trained_model_object  # creating the tranined object
 
-    def predict(self, X):
+    def predict(self, X):  # to make the prediction
         """
         function accepts raw inputs and then transformed raw input using preprocessing_object
         which gurantees that the inputs are in the same format as the training data
@@ -41,60 +41,60 @@ class HousingEstimatorModel:
 
 class ModelTrainer:
 
-    def __init__(self, model_trainer_config:ModelTrainerConfig, data_transformation_artifact: DataTransformationArtifact):
+    def __init__(self, model_trainer_config:ModelTrainerConfig, data_transformation_artifact: DataTransformationArtifact):  # model trainer object
         try:
             logging.info(f"{'>>' * 30}Model trainer log started.{'<<' * 30} ")
-            self.model_trainer_config = model_trainer_config
-            self.data_transformation_artifact = data_transformation_artifact
+            self.model_trainer_config = model_trainer_config  # getting the path of the model trainer object
+            self.data_transformation_artifact = data_transformation_artifact  # getting the path of transformation object
         except Exception as e:
             raise HousingException(e, sys) from e
 
-    def initiate_model_trainer(self)->ModelTrainerArtifact:
+    def initiate_model_trainer(self)->ModelTrainerArtifact:  # inilialing the model trainer
         try:
             logging.info(f"Loading transformed training dataset")
-            transformed_train_file_path = self.data_transformation_artifact.transformed_train_file_path
+            transformed_train_file_path = self.data_transformation_artifact.transformed_train_file_path  # getting the transformed train path
             train_array = load_numpy_array_data(file_path=transformed_train_file_path)
 
             logging.info(f"Loading transformed testing dataset")
-            transformed_test_file_path = self.data_transformation_artifact.transformed_test_file_path
+            transformed_test_file_path = self.data_transformation_artifact.transformed_test_file_path  # getting the transformed test path
             test_array = load_numpy_array_data(file_path=transformed_test_file_path)
 
             logging.info(f"Splitting training and testing input and target feature")
-            x_train,y_train,x_test,y_test = train_array[:,:-1],train_array[:,-1],test_array[:,:-1],test_array[:,-1]
+            x_train,y_train,x_test,y_test = train_array[:,:-1],train_array[:,-1],test_array[:,:-1],test_array[:,-1]  # splitting the dataset
             
 
             logging.info(f"Extracting model config file path")
-            model_config_file_path = self.model_trainer_config.model_config_file_path
+            model_config_file_path = self.model_trainer_config.model_config_file_path  # file path of model config 
 
             logging.info(f"Initializing model factory class using above model config file: {model_config_file_path}")
-            model_factory = ModelFactory(model_config_path=model_config_file_path)
+            model_factory = ModelFactory(model_config_path=model_config_file_path)  # iniziating the object
             
             
-            base_accuracy = self.model_trainer_config.base_accuracy
+            base_accuracy = self.model_trainer_config.base_accuracy  # getting the base accuracy from the config.yaml file
             logging.info(f"Expected accuracy: {base_accuracy}")
 
             logging.info(f"Initiating operation model selecttion")
-            best_model = model_factory.get_best_model(X=x_train,y=y_train,base_accuracy=base_accuracy)
+            best_model = model_factory.get_best_model(X=x_train,y=y_train,base_accuracy=base_accuracy)  # getting the best model from the model trainer
             
             logging.info(f"Best model found on training dataset: {best_model}")
             
             logging.info(f"Extracting trained model list.")
-            grid_searched_best_model_list:List[GridSearchedBestModel]=model_factory.grid_searched_best_model_list
+            grid_searched_best_model_list:List[GridSearchedBestModel]=model_factory.grid_searched_best_model_list  # inlitzing the gridsearch cv
             
-            model_list = [model.best_model for model in grid_searched_best_model_list ]
+            model_list = [model.best_model for model in grid_searched_best_model_list ]  # evaluating all the models
             logging.info(f"Evaluation all trained model on training and testing dataset both")
             metric_info:MetricInfoArtifact = evaluate_regression_model(model_list=model_list,X_train=x_train,y_train=y_train,X_test=x_test,y_test=y_test,base_accuracy=base_accuracy)
 
             logging.info(f"Best found model on both training and testing dataset.")
             
-            preprocessing_obj=  load_object(file_path=self.data_transformation_artifact.preprocessed_object_file_path)
+            preprocessing_obj=  load_object(file_path=self.data_transformation_artifact.preprocessed_object_file_path)  # creating the object for pickle file
             model_object = metric_info.model_object
 
 
-            trained_model_file_path=self.model_trainer_config.trained_model_file_path
+            trained_model_file_path=self.model_trainer_config.trained_model_file_path  # getting model trained path
             housing_model = HousingEstimatorModel(preprocessing_object=preprocessing_obj,trained_model_object=model_object)
             logging.info(f"Saving model at path: {trained_model_file_path}")
-            save_object(file_path=trained_model_file_path,obj=housing_model)
+            save_object(file_path=trained_model_file_path,obj=housing_model)  # saving the model pickle file in directory
 
 
             model_trainer_artifact=  ModelTrainerArtifact(is_trained=True,message="Model Trained successfully",
