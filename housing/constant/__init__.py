@@ -45,12 +45,12 @@ DATA_INGESTION_TEST_DIR_KEY = "ingested_test_dir"  # path for the ingested test 
 
 
 # Data Validation related variables
-DATA_VALIDATION_CONFIG_KEY = "data_validation_config"
-DATA_VALIDATION_SCHEMA_FILE_NAME_KEY = "schema_file_name"
-DATA_VALIDATION_SCHEMA_DIR_KEY = "schema_dir"
-DATA_VALIDATION_ARTIFACT_DIR_NAME="data_validation"
-DATA_VALIDATION_REPORT_FILE_NAME_KEY = "report_file_name"
-DATA_VALIDATION_REPORT_PAGE_FILE_NAME_KEY = "report_page_file_name"
+DATA_VALIDATION_CONFIG_KEY = "data_validation_config"   # path for data validation path 
+DATA_VALIDATION_SCHEMA_FILE_NAME_KEY = "schema_file_name" # name of schema file
+DATA_VALIDATION_SCHEMA_DIR_KEY = "schema_dir"  # path for the schema dir
+DATA_VALIDATION_ARTIFACT_DIR_NAME="data_validation"  # name of the folder
+DATA_VALIDATION_REPORT_FILE_NAME_KEY = "report_file_name"  # report folder
+DATA_VALIDATION_REPORT_PAGE_FILE_NAME_KEY = "report_page_file_name" # report html folder
 
 
 

@@ -15,7 +15,7 @@ class DataValidation:
     
 
     def __init__(self, data_validation_config:DataValidationConfig,
-        data_ingestion_artifact:DataIngestionArtifact):
+        data_ingestion_artifact:DataIngestionArtifact): 
         try:
             logging.info(f"{'>>'*30}Data Valdaition log started.{'<<'*30} \n\n")
             self.data_validation_config = data_validation_config
@@ -25,6 +25,7 @@ class DataValidation:
 
 
     def get_train_and_test_df(self):
+        '''This function will get the train and test data from previous component'''
         try:
             train_df = pd.read_csv(self.data_ingestion_artifact.train_file_path)
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
@@ -34,27 +35,28 @@ class DataValidation:
 
 
     def is_train_test_file_exists(self)->bool:
+        '''This function will check whether the train and test data available'''
         try:
             logging.info("Checking if training and test file is available")
             is_train_file_exist = False
             is_test_file_exist = False
 
-            train_file_path = self.data_ingestion_artifact.train_file_path
-            test_file_path = self.data_ingestion_artifact.test_file_path
+            train_file_path = self.data_ingestion_artifact.train_file_path  # get the path of train data
+            test_file_path = self.data_ingestion_artifact.test_file_path  # get the path of test data
 
-            is_train_file_exist = os.path.exists(train_file_path)
-            is_test_file_exist = os.path.exists(test_file_path)
+            is_train_file_exist = os.path.exists(train_file_path) # check for train data
+            is_test_file_exist = os.path.exists(test_file_path)  # check for test data
 
-            is_available =  is_train_file_exist and is_test_file_exist
+            is_available =  is_train_file_exist and is_test_file_exist # if data is availble it returns true
 
             logging.info(f"Is train and test file exists?-> {is_available}")
             
-            if not is_available:
-                training_file = self.data_ingestion_artifact.train_file_path
-                testing_file = self.data_ingestion_artifact.test_file_path
+            if not is_available: # if data is not present
+                training_file = self.data_ingestion_artifact.train_file_path  # path of train data
+                testing_file = self.data_ingestion_artifact.test_file_path # path od the test data
                 message=f"Training file: {training_file} or Testing file: {testing_file}" \
-                    "is not present"
-                raise Exception(message)
+                    "is not present"  
+                raise Exception(message)  
 
             return is_available
         except Exception as e:
@@ -64,17 +66,6 @@ class DataValidation:
     def validate_dataset_schema(self)->bool:
         try:
             validation_status = False
-            
-            #Assigment validate training and testing dataset using schema file
-            #1. Number of Column
-            #2. Check the value of ocean proximity 
-            # acceptable values     <1H OCEAN
-            # INLAND
-            # ISLAND
-            # NEAR BAY
-            # NEAR OCEAN
-            #3. Check column names
-
 
             validation_status = True
             return validation_status 
@@ -82,8 +73,9 @@ class DataValidation:
             raise HousingException(e,sys) from e
 
     def get_and_save_data_drift_report(self):
+        '''this function will check for data drift in the dataset using evidently'''
         try:
-            profile = Profile(sections=[DataDriftProfileSection()])
+            profile = Profile(sections=[DataDriftProfileSection()])   
 
             train_df,test_df = self.get_train_and_test_df()
 
@@ -102,6 +94,8 @@ class DataValidation:
             raise HousingException(e,sys) from e
 
     def save_data_drift_report_page(self):
+
+        '''This function prints the report page using evidently'''
         try:
             dashboard = Dashboard(tabs=[DataDriftTab()])
             train_df,test_df = self.get_train_and_test_df()
@@ -116,6 +110,7 @@ class DataValidation:
             raise HousingException(e,sys) from e
 
     def is_data_drift_found(self)->bool:
+        '''this function will print boolean value if the data drift is found in the dataset'''
         try:
             report = self.get_and_save_data_drift_report()
             self.save_data_drift_report_page()
@@ -123,7 +118,8 @@ class DataValidation:
         except Exception as e:
             raise HousingException(e,sys) from e
 
-    def initiate_data_validation(self)->DataValidationArtifact :
+    def initiate_data_validation(self)->DataValidationArtifact :  
+        '''THis function helps to initiate the data validation component'''
         try:
             self.is_train_test_file_exists()
             self.validate_dataset_schema()
@@ -143,5 +139,5 @@ class DataValidation:
 
 
     def __del__(self):
-        logging.info(f"{'>>'*30}Data Valdaition log completed.{'<<'*30} \n\n")
+        logging.info(f"{'>>'*15}Data Valdaition log completed.{'<<'*15} \n\n")
         

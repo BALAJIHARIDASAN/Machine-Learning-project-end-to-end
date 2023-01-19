@@ -1,4 +1,12 @@
-columns:
+
+# information about the dataset 
+# always check for the column data types
+# it defines the struture of the dataset
+# it used to validate the dataset
+
+
+
+columns:  # column names
   longitude: float
   latitude: float
   housing_median_age: float
@@ -10,7 +18,7 @@ columns:
   median_house_value: float
   ocean_proximity: category
 
-numerical_columns:
+numerical_columns: # numerical column
   - longitude
   - latitude
   - housing_median_age
@@ -22,7 +30,7 @@ numerical_columns:
 
 
 
-categorical_columns:
+categorical_columns: # categorical column
   - ocean_proximity
 
 
@@ -30,7 +38,7 @@ categorical_columns:
 
 target_column: median_house_value
 
-domain_value:
+domain_value:  # acceptable values in the categorical column
   ocean_proximity:
     - <1H OCEAN
     - INLAND

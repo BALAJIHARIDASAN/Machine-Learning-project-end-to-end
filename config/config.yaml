@@ -28,9 +28,9 @@ data_ingestion_config:  # folder location
 
 
 # data validation
-data_validation_config:
-  schema_dir: config
-  schema_file_name: schema.yaml
+data_validation_config:   # path for the data validation
+  schema_dir: config  # schema directory
+  schema_file_name: schema.yaml  # schema file name
   report_file_name: report.json
   report_page_file_name: report.html
 

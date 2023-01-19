@@ -94,29 +94,30 @@ class Configuartion:
 # data validation configuration
     def get_data_validation_config(self) -> DataValidationConfig:
         try:
-            artifact_dir = self.training_pipeline_config.artifact_dir
+            artifact_dir = self.training_pipeline_config.artifact_dir # this will get the path of root directory
 
             data_validation_artifact_dir=os.path.join(
                 artifact_dir,
                 DATA_VALIDATION_ARTIFACT_DIR_NAME,
-                self.time_stamp
-            )
-            data_validation_config = self.config_info[DATA_VALIDATION_CONFIG_KEY]
+                self.time_stamp  
+            )  # get the directory same as ingestion to create the directory
+
+            data_validation_config = self.config_info[DATA_VALIDATION_CONFIG_KEY] # 
 
 
             schema_file_path = os.path.join(ROOT_DIR,
             data_validation_config[DATA_VALIDATION_SCHEMA_DIR_KEY],
             data_validation_config[DATA_VALIDATION_SCHEMA_FILE_NAME_KEY]
-            )
+            )#chema_file_path='c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\config\\schema.yaml'
 
             report_file_path = os.path.join(data_validation_artifact_dir,
             data_validation_config[DATA_VALIDATION_REPORT_FILE_NAME_KEY]
-            )
+            ) # report_file_path='c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_validation\\2023-01-19-18-11-28\\report.json'
 
             report_page_file_path = os.path.join(data_validation_artifact_dir,
             data_validation_config[DATA_VALIDATION_REPORT_PAGE_FILE_NAME_KEY]
 
-            )
+            )#report_page_file_path='c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_validation\\2023-01-19-18-11-28\\report.html'
 
             data_validation_config = DataValidationConfig(
                 schema_file_path=schema_file_path,
@@ -250,7 +251,7 @@ class Configuartion:
 
 
 
-# model trainer configuration
+#trainer configuration
     def get_training_pipeline_config(self) ->TrainingPipelineConfig:
 
         ''''this function will return a  path like'
