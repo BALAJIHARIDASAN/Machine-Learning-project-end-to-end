@@ -25,26 +25,33 @@ from housing.component.model_evaluation import *
 from housing.component.model_pusher import *
 
 
-class Pipeline:
+class Pipeline:  # creating the pipeline 
 
 
     def __init__(self,config:Configuartion= Configuartion()):
         try:
-            self.config = config
+            self.config = config # get the path of the directory
 
         except Exception as e:
             raise HousingException(e,sys) from e
 
 
+    # data ingestion pipeline
+    def start_data_ingestion(self) -> DataIngestionArtifact:  # data ingestion pipeline
 
-    def start_data_ingestion(self) -> DataIngestionArtifact:
+        '''This function will helps to download dataset and split the data set into train and test data 
+        and creates the data ingestion aritfact and save the file from the output of the data ingestion process
+        '''
         try:
-            data_ingestion = DataIngestion(data_ingestion_config = self.config.get_data_ingestion_config())
+            data_ingestion = DataIngestion(data_ingestion_config = self.config.get_data_ingestion_config())   
             return data_ingestion.initiate_data_ingestion()
 
         except Exception as e:
             raise HousingException(e,sys) from e
 
+
+
+# data validation pipeline
     def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) \
             -> DataValidationArtifact:
         try:
@@ -55,6 +62,9 @@ class Pipeline:
         except Exception as e:
             raise HousingException(e, sys) from e
 
+
+
+# data transformation pipeline
     def start_data_transformation(self,
                                   data_ingestion_artifact: DataIngestionArtifact,
                                   data_validation_artifact: DataValidationArtifact
@@ -69,6 +79,9 @@ class Pipeline:
         except Exception as e:
             raise HousingException(e, sys)
 
+
+
+# model trainer pipeline
     def start_model_trainer(self, data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
         try:
             model_trainer = ModelTrainer(model_trainer_config=self.config.get_model_trainer_config(),
@@ -78,6 +91,9 @@ class Pipeline:
         except Exception as e:
             raise HousingException(e, sys) from e
 
+
+
+# model evaluation pipeline
     def start_model_evaluation(self, data_ingestion_artifact: DataIngestionArtifact,
                                data_validation_artifact: DataValidationArtifact,
                                model_trainer_artifact: ModelTrainerArtifact) -> ModelEvaluationArtifact:
@@ -92,6 +108,8 @@ class Pipeline:
             raise HousingException(e, sys) from e
 
 
+
+# model pusher pipeline
     def start_model_pusher(self, model_eval_artifact: ModelEvaluationArtifact) -> ModelPusherArtifact:
         try:
             model_pusher = ModelPusher(
@@ -103,9 +121,12 @@ class Pipeline:
             raise HousingException(e, sys) from e
     
 
+
+# run the pipeline
     def run_pipeline(self):  # to call the pipeline
+        '''This function will helps to run the pipeline '''
         try:
-            data_ingestion_artifact = self.start_data_ingestion()
+            data_ingestion_artifact = self.start_data_ingestion()   # runs the data ingestion component
             data_validation_artifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             data_transformation_artifact = self.start_data_transformation(data_ingestion_artifact=data_ingestion_artifact,
                                             data_validation_artifact=data_validation_artifact)
