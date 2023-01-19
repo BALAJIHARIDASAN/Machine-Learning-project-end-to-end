@@ -1,8 +1,9 @@
-# code for data ingestion configuration
+# code for data ingestion component
 
-# 1. download housing data
-# 2. extract the data
-# 3. Split the data as train and test
+# 1. download housing data and save in the tgz folder
+# 2. extract the data and save in the raw data folder
+# 3. create data ingested folder
+# 4. Split the data as train and test and save in train and test folder inside the data ingested folder
 
 
 
@@ -30,6 +31,8 @@ class DataIngestion:
 
     def download_housing_data(self,) -> str:  # download the data from url
         try:
+            '''This function helps to download the data from the url
+            '''
             #extraction remote url to download dataset
             download_url = self.data_ingestion_config.dataset_download_url
 
@@ -51,6 +54,7 @@ class DataIngestion:
             raise HousingException(e,sys) from e
 
     def extract_tgz_file(self,tgz_file_path:str):  # extracting the data 
+        '''This function helps to extract the dataset '''
         try:
             raw_data_dir = self.data_ingestion_config.raw_data_dir  # get the directory of raw data folder
 
@@ -68,6 +72,8 @@ class DataIngestion:
             raise HousingException(e,sys) from e
     
     def split_data_as_train_test(self) -> DataIngestionArtifact:  # split the data into train and test dataset
+
+        '''' This function helps to split the data into train and test data'''
         try:
             raw_data_dir = self.data_ingestion_config.raw_data_dir  # get the directory for data ingested
 
@@ -124,7 +130,7 @@ class DataIngestion:
         except Exception as e:
             raise HousingException(e,sys) from e
 
-    def initiate_data_ingestion(self)-> DataIngestionArtifact:  # to initiate the data ingestion component
+    def initiate_data_ingestion(self)-> DataIngestionArtifact:  # to initiate the data ingestion component and produces the data ingestion aritifact
         '''This function will return the data ingestion artifact path'''
         try:
             tgz_file_path =  self.download_housing_data()  # download the file

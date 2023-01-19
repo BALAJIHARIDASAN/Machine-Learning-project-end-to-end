@@ -1,5 +1,7 @@
 
 # artifact_entity - the  output of the each component of pipeline
+# this file gives the information about the output produced by component in the pipeline
+
 
 
 from collections import namedtuple
@@ -30,7 +32,9 @@ ModelTrainerArtifact = namedtuple("ModelTrainerArtifact", ["is_trained", "messag
 
 # output folder of the model evaluation component
 ModelEvaluationArtifact = namedtuple("ModelEvaluationArtifact", ["is_model_accepted", "evaluated_model_path"])
+                                                                # status            # evalued model folder path
 
 
 # output folder of the final model component
 ModelPusherArtifact = namedtuple("ModelPusherArtifact", ["is_model_pusher", "export_model_file_path"])
+                                                            # status            # final model pickle folder path  
