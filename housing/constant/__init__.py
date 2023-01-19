@@ -1,25 +1,28 @@
 
 
 # This file is used to store the constant variables that will be required for the project.
+# This will always in the upper case
 
 
 import os
 from datetime import datetime
 
 
-def get_current_time_stamp():
+def get_current_time_stamp(): 
+    '''this function used to create the timestamp '''
+
     return f"{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"
 
     
 ROOT_DIR = os.getcwd()  #to get current working directory
-CONFIG_DIR = "config"    # folder for config 
-CONFIG_FILE_NAME = "config.yaml"   # name of the config file
-CONFIG_FILE_PATH = os.path.join(ROOT_DIR,CONFIG_DIR,CONFIG_FILE_NAME)  # folder name of the config file path
-# Used to read the config.yaml file
+CONFIG_DIR = "config"    # get the path of the config file
+CONFIG_FILE_NAME = "config.yaml"   # get the path of the config.yaml file
+CONFIG_FILE_PATH = os.path.join(ROOT_DIR,CONFIG_DIR,CONFIG_FILE_NAME)  # this will get the path of the config.yaml file
+# Used to read the config.yaml file from the directory
 
 
 
-CURRENT_TIME_STAMP = get_current_time_stamp()
+CURRENT_TIME_STAMP = get_current_time_stamp()  # inializing the value for current time stamp
 
 
 # Training pipeline related variable

@@ -16,13 +16,13 @@ from housing.exception import HousingException
 class Configuartion:
 
     def __init__(self,
-        config_file_path:str =CONFIG_FILE_PATH,
-        current_time_stamp:str = CURRENT_TIME_STAMP
+        config_file_path:str =CONFIG_FILE_PATH, # default value for the config file path from constant file
+        current_time_stamp:str = CURRENT_TIME_STAMP  # default value for the current time stamp from the constant file
         ) -> None:
         try:
-            self.config_info  = read_yaml_file(file_path=config_file_path)
-            self.training_pipeline_config = self.get_training_pipeline_config()
-            self.time_stamp = current_time_stamp
+            self.config_info  = read_yaml_file(file_path=config_file_path) # this line will get the path from to the yaml file
+            self.training_pipeline_config = self.get_training_pipeline_config()  # this will get the path of the training pipeline
+            self.time_stamp = current_time_stamp   # current time stamp
         except Exception as e:
             raise HousingException(e,sys) from e
 

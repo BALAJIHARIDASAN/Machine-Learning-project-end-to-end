@@ -1,4 +1,8 @@
 # This file is used to create helper function which is not part of the project but necessary function for projects
+# It is not of the pipeline
+
+
+
 import yaml
 from housing.exception import HousingException
 import os,sys
@@ -23,6 +27,7 @@ def write_yaml_file(file_path:str,data:dict=None):
         raise HousingException(e,sys)
 
 
+# this function helps to get the path of the yaml file 
 def read_yaml_file(file_path:str)->dict:
     """
     Reads a YAML file and returns the contents as a dictionary.
