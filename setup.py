@@ -12,7 +12,7 @@ REQUIREMENT_FILE_NAME="requirements.txt"  # reading the requirement file
 HYPHEN_E_DOT = "-e ."  # to run all required packages for project
 
 
-def get_requirements_list() -> List[str]:   # output of the file is list of string type
+def get_requirements_list() -> List[str]:   # output of the file is list of string type like [numpy],[pandas],[sklearn]
     """
     Description: This function is going to return list of requirement
     mention in requirements.txt file
@@ -32,5 +32,5 @@ version=VERSION,
 author=AUTHOR,
 description=DESRCIPTION,
 packages=find_packages(), 
-install_requires=get_requirements_list()
-)
+install_requires=get_requirements_list() # to read the packages in the requirements.txt
+)  
