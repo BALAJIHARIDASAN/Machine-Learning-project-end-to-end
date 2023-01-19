@@ -1,6 +1,8 @@
 from collections import namedtuple
 # Input for the every component in the pipeline
+# This infomation should be provided  to the configuration
 
+# The information required to this config_entity will be read from the config.yaml file
 
 
 # input information provides to the data ingestion component - this component contains these informations
@@ -31,7 +33,7 @@ ModelEvaluationConfig = namedtuple("ModelEvaluationConfig", ["model_evaluation_f
 
 # input provides to the  model pusher component
 ModelPusherConfig = namedtuple("ModelPusherConfig", ["export_dir_path"])
-                                                    # folder for model 
+                                                    # folder for model  
 
 
 # input to the training pipeline component
