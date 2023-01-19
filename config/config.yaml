@@ -1,13 +1,14 @@
 
-# information that to provided to the configuration]
+# information that to provided to the configuration
 
-# all infomration about the configuration is provided here
+# all information about the configuration is provided here
 
 # config should read the all the file and structure from the entity and provide configuration to every component in the pipeline
 
 
 
 
+# this will helps to create the folder to stores the data that is created by running the pipeline
 
 training_pipeline_config:
   pipeline_name: housing    # name of the pipeline
