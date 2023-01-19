@@ -1,4 +1,4 @@
-# Perform task on every component on pipeline
+# 
 
 # configuration for components
 
@@ -10,6 +10,8 @@ import sys,os
 from housing.constant import *
 from housing.exception import HousingException
 
+
+# If we call these function we will get the entity from the config_entity
 
 class Configuartion:
 
@@ -26,6 +28,7 @@ class Configuartion:
 
 
     def get_data_ingestion_config(self) ->DataIngestionConfig:
+        '''This function '''
         try:
             artifact_dir = self.training_pipeline_config.artifact_dir
             data_ingestion_artifact_dir=os.path.join(
