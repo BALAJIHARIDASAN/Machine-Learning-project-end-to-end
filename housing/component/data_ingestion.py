@@ -1,3 +1,11 @@
+# code for data ingestion configuration
+
+# 1. download housing data
+# 2. extract the data
+# 3. Split the data as train and test
+
+
+
 from housing.entity.config_entity import DataIngestionConfig
 import sys,os
 from housing.exception import HousingException
@@ -14,7 +22,7 @@ class DataIngestion:
     def __init__(self,data_ingestion_config:DataIngestionConfig ):
         try:
             logging.info(f"{'>>'*20}Data Ingestion log started.{'<<'*20} ")
-            self.data_ingestion_config = data_ingestion_config
+            self.data_ingestion_config = data_ingestion_config  # inilizing the data ingestion config path
 
         except Exception as e:
             raise HousingException(e,sys)
@@ -117,10 +125,11 @@ class DataIngestion:
             raise HousingException(e,sys) from e
 
     def initiate_data_ingestion(self)-> DataIngestionArtifact:  # to initiate the data ingestion component
+        '''This function will return the data ingestion artifact path'''
         try:
             tgz_file_path =  self.download_housing_data()  # download the file
             self.extract_tgz_file(tgz_file_path=tgz_file_path) # extract the file
-            return self.split_data_as_train_test() # split the file
+            return self.split_data_as_train_test() # split the file as train and test
         except Exception as e:
             raise HousingException(e,sys) from e
     

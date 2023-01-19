@@ -16,8 +16,8 @@ from housing.exception import HousingException
 class Configuartion:
 
     def __init__(self,
-        config_file_path:str =CONFIG_FILE_PATH, # default value for the config file path from constant file
-        current_time_stamp:str = CURRENT_TIME_STAMP  # default value for the current time stamp from the constant file
+        config_file_path:str =CONFIG_FILE_PATH,
+        current_time_stamp:str = CURRENT_TIME_STAMP 
         ) -> None:
         try:
             self.config_info  = read_yaml_file(file_path=config_file_path) # this line will get the path from to the yaml file
@@ -27,38 +27,53 @@ class Configuartion:
             raise HousingException(e,sys) from e
 
 
+
+# data ingestion configuration
     def get_data_ingestion_config(self) ->DataIngestionConfig:
-        '''This function '''
+        '''This function will give path output as 
+
+        DataIngestionConfig(dataset_download_url='https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.tgz', 
+        tgz_download_dir='c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_ingestion\\2023-01-19-13-57-21\\tgz_data', 
+        raw_data_dir='c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_ingestion\\2023-01-19-13-57-21\\raw_data', 
+        ingested_train_dir='c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_ingestion\\2023-01-19-13-57-21\\ingested_data\\train', 
+        ingested_test_dir='c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_ingestion\\2023-01-19-13-57-21\\ingested_data\\test')
+         '''
         try:
-            artifact_dir = self.training_pipeline_config.artifact_dir
+            artifact_dir = self.training_pipeline_config.artifact_dir  # this wil get the path of the aritifact dir
             data_ingestion_artifact_dir=os.path.join(
                 artifact_dir,
                 DATA_INGESTION_ARTIFACT_DIR,
                 self.time_stamp
-            )
-            data_ingestion_info = self.config_info[DATA_INGESTION_CONFIG_KEY]
+            ) # this line will get the complete path of the yaml file
+            data_ingestion_info = self.config_info[DATA_INGESTION_CONFIG_KEY]   # this will get the path of the yaml file
             
-            dataset_download_url = data_ingestion_info[DATA_INGESTION_DOWNLOAD_URL_KEY]
+            dataset_download_url = data_ingestion_info[DATA_INGESTION_DOWNLOAD_URL_KEY]  # this will get the url from the yaml file
+
             tgz_download_dir = os.path.join(
                 data_ingestion_artifact_dir,
                 data_ingestion_info[DATA_INGESTION_TGZ_DOWNLOAD_DIR_KEY]
-            )
+            ) # 'c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_ingestion\\tgz_data'
+
             raw_data_dir = os.path.join(data_ingestion_artifact_dir,
             data_ingestion_info[DATA_INGESTION_RAW_DATA_DIR_KEY]
-            )
+            )  # 'c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_ingestion\\raw_data'
 
             ingested_data_dir = os.path.join(
                 data_ingestion_artifact_dir,
                 data_ingestion_info[DATA_INGESTION_INGESTED_DIR_NAME_KEY]
-            )
+            ) # 'c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_ingestion\\ingested_data'
+
+
             ingested_train_dir = os.path.join(
                 ingested_data_dir,
                 data_ingestion_info[DATA_INGESTION_TRAIN_DIR_KEY]
-            )
+            )  # 'c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_ingestion\\ingested_data\\train'
+
+
             ingested_test_dir =os.path.join(
                 ingested_data_dir,
                 data_ingestion_info[DATA_INGESTION_TEST_DIR_KEY]
-            )
+            )   # 'c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_ingestion\\ingested_data\\test'
 
 
             data_ingestion_config=DataIngestionConfig(
@@ -73,6 +88,10 @@ class Configuartion:
         except Exception as e:
             raise HousingException(e,sys) from e
 
+
+
+
+# data validation configuration
     def get_data_validation_config(self) -> DataValidationConfig:
         try:
             artifact_dir = self.training_pipeline_config.artifact_dir
@@ -108,6 +127,9 @@ class Configuartion:
         except Exception as e:
             raise HousingException(e,sys) from e
 
+
+
+# data transformation configuration
     def get_data_transformation_config(self) -> DataTransformationConfig:
         try:
             artifact_dir = self.training_pipeline_config.artifact_dir
@@ -157,6 +179,9 @@ class Configuartion:
         except Exception as e:
             raise HousingException(e,sys) from e
 
+
+
+# data model trainer configuration
     def get_model_trainer_config(self) -> ModelTrainerConfig:
         try:
             artifact_dir = self.training_pipeline_config.artifact_dir
@@ -188,6 +213,8 @@ class Configuartion:
         except Exception as e:
             raise HousingException(e,sys) from e
 
+
+# model evalutation configuration
     def get_model_evaluation_config(self) ->ModelEvaluationConfig:
         try:
             model_evaluation_config = self.config_info[MODEL_EVALUATION_CONFIG_KEY]
@@ -206,6 +233,7 @@ class Configuartion:
             raise HousingException(e,sys) from e
 
 
+# model pusher configuration
     def get_model_pusher_config(self) -> ModelPusherConfig:
         try:
             time_stamp = f"{datetime.now().strftime('%Y%m%d%H%M%S')}"
@@ -220,6 +248,9 @@ class Configuartion:
         except Exception as e:
             raise HousingException(e,sys) from e
 
+
+
+# model trainer configuration
     def get_training_pipeline_config(self) ->TrainingPipelineConfig:
 
         ''''this function will return a  path like'
