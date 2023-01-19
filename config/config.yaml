@@ -1,10 +1,24 @@
+
+# information that to provided to the configuration]
+
+# all infomration about the configuration is provided here
+
+# config should read the all the file and structure from the entity and provide configuration to every component in the pipeline
+
+
+
+
+
 training_pipeline_config:
   pipeline_name: housing    # name of the pipeline
   artifact_dir: artifact    # folder to store the all the information about the artifact
 
+
+
+#data ingestion 
 data_ingestion_config:  # folder location 
   dataset_download_url: https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.tgz  # url detail
-  raw_data_dir: raw_data
+  raw_data_dir: raw_data 
   tgz_download_dir: tgz_data
   ingested_dir: ingested_data
   ingested_train_dir: train
@@ -12,13 +26,15 @@ data_ingestion_config:  # folder location
 
 
 
-
+# data validation
 data_validation_config:
   schema_dir: config
   schema_file_name: schema.yaml
   report_file_name: report.json
   report_page_file_name: report.html
 
+
+# data transfomation
 data_transformation_config:
   add_bedroom_per_room: true
   transformed_dir: transformed_data
@@ -26,7 +42,9 @@ data_transformation_config:
   transformed_test_dir: test
   preprocessing_dir: preprocessed
   preprocessed_object_file_name: preprocessed.pkl
-  
+
+
+# model tranier
 model_trainer_config:
   trained_model_dir: trained_model
   model_file_name: model.pkl
@@ -35,10 +53,14 @@ model_trainer_config:
   model_config_file_name: model.yaml
 
 
+
+#model evaluation
 model_evaluation_config:
   model_evaluation_file_name: model_evaluation.yaml
   
 
+
+# model pusher
 model_pusher_config:
   model_export_dir: saved_models
 

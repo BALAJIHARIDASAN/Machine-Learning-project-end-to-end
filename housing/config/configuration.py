@@ -1,3 +1,6 @@
+# Perform task on every component on pipeline
+
+# configuration for components
 
 from housing.entity.config_entity import DataIngestionConfig, DataTransformationConfig,DataValidationConfig,   \
 ModelTrainerConfig,ModelEvaluationConfig,ModelPusherConfig,TrainingPipelineConfig
