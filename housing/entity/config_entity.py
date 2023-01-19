@@ -3,7 +3,7 @@ from collections import namedtuple
 
 
 
-# input to the data ingestion component
+# input to the data ingestion component - 
 DataIngestionConfig=namedtuple("DataIngestionConfig",
 ["dataset_download_url",  "tgz_download_dir",             "raw_data_dir",    "ingested_train_dir", "ingested_test_dir"])
  # url                     # folder for compressed file   # raw data folder   # train folder        # test folder
