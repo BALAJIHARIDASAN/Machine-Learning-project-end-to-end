@@ -33,16 +33,16 @@ TRAINING_PIPELINE_NAME_KEY = "pipeline_name"
 
 # Data Ingestion related variable
 
-DATA_INGESTION_CONFIG_KEY = "data_ingestion_config"
+DATA_INGESTION_CONFIG_KEY = "data_ingestion_config"  # path for the data ingestion config file
 DATA_INGESTION_ARTIFACT_DIR = "data_ingestion"   # folder to be created to store the data ingestion 
-DATA_INGESTION_DOWNLOAD_URL_KEY = "dataset_download_url" 
-DATA_INGESTION_RAW_DATA_DIR_KEY = "raw_data_dir"
-DATA_INGESTION_TGZ_DOWNLOAD_DIR_KEY = "tgz_download_dir"
-DATA_INGESTION_INGESTED_DIR_NAME_KEY = "ingested_dir"
-DATA_INGESTION_TRAIN_DIR_KEY = "ingested_train_dir"
-DATA_INGESTION_TEST_DIR_KEY = "ingested_test_dir"
+DATA_INGESTION_DOWNLOAD_URL_KEY = "dataset_download_url" # path for dataset download url
+DATA_INGESTION_RAW_DATA_DIR_KEY = "raw_data_dir"# path for raw data set
+DATA_INGESTION_TGZ_DOWNLOAD_DIR_KEY = "tgz_download_dir" # path for download dir
+DATA_INGESTION_INGESTED_DIR_NAME_KEY = "ingested_dir" # path for the ingested dir
+DATA_INGESTION_TRAIN_DIR_KEY = "ingested_train_dir"  # path for the ingested train dir
+DATA_INGESTION_TEST_DIR_KEY = "ingested_test_dir"  # path for the ingested test dir
+# this information will be read from the config.yaml file
 
-# Data Validation related variable
 
 # Data Validation related variables
 DATA_VALIDATION_CONFIG_KEY = "data_validation_config"

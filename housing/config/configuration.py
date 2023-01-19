@@ -1,4 +1,4 @@
-# 
+# This will give the information about the folders
 
 # configuration for components
 
@@ -225,7 +225,7 @@ class Configuartion:
         ''''this function will return a  path like'
         
         TrainingPipelineConfig(artifact_dir='c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact')
-        
+
          '''
         try:
             training_pipeline_config = self.config_info[TRAINING_PIPELINE_CONFIG_KEY]  # this line will get the path of the yaml file contains details about the pipline
@@ -234,9 +234,9 @@ class Configuartion:
             training_pipeline_config[TRAINING_PIPELINE_ARTIFACT_DIR_KEY]
             )  # this line will get the path of the aritifact in the config.yaml file
 
-            training_pipeline_config = TrainingPipelineConfig(artifact_dir=artifact_dir)
+            training_pipeline_config = TrainingPipelineConfig(artifact_dir=artifact_dir) # this the function that return in the config_entity file that hepls to generate an object
             logging.info(f"Training pipleine config: {training_pipeline_config}")
-            return training_pipeline_config
+            return training_pipeline_config 
         except Exception as e:
             raise HousingException(e,sys) from e
 
