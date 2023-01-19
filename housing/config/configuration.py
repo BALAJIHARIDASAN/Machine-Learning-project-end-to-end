@@ -221,12 +221,18 @@ class Configuartion:
             raise HousingException(e,sys) from e
 
     def get_training_pipeline_config(self) ->TrainingPipelineConfig:
+
+        ''''this function will return a  path like'
+        
+        TrainingPipelineConfig(artifact_dir='c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact')
+        
+         '''
         try:
-            training_pipeline_config = self.config_info[TRAINING_PIPELINE_CONFIG_KEY]
+            training_pipeline_config = self.config_info[TRAINING_PIPELINE_CONFIG_KEY]  # this line will get the path of the yaml file contains details about the pipline
             artifact_dir = os.path.join(ROOT_DIR,
             training_pipeline_config[TRAINING_PIPELINE_NAME_KEY],
             training_pipeline_config[TRAINING_PIPELINE_ARTIFACT_DIR_KEY]
-            )
+            )  # this line will get the path of the aritifact in the config.yaml file
 
             training_pipeline_config = TrainingPipelineConfig(artifact_dir=artifact_dir)
             logging.info(f"Training pipleine config: {training_pipeline_config}")
