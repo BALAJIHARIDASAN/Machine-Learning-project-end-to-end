@@ -13,14 +13,14 @@ from housing.exception import HousingException
 
 # If we call these function we will get the entity from the config_entity
 
-class Configuartion:
+class Configuration:
 
     def __init__(self,
         config_file_path:str =CONFIG_FILE_PATH,
         current_time_stamp:str = CURRENT_TIME_STAMP 
         ) -> None:
         try:
-            self.config_info  = read_yaml_file(file_path=config_file_path) # this line will get the path from to the yaml file
+            self.config_info  = read_yaml_file(file_path=config_file_path) # this line will get the read data  from to the yaml file
             self.training_pipeline_config = self.get_training_pipeline_config()  # this will get the path of the training pipeline
             self.time_stamp = current_time_stamp   # current time stamp
         except Exception as e:
@@ -132,14 +132,16 @@ class Configuartion:
 
 # data transformation configuration
     def get_data_transformation_config(self) -> DataTransformationConfig:
+
+        '''This function will return the path or the configuration that required for data transformation component'''
         try:
-            artifact_dir = self.training_pipeline_config.artifact_dir
+            artifact_dir = self.training_pipeline_config.artifact_dir # 
 
             data_transformation_artifact_dir=os.path.join(
                 artifact_dir,
                 DATA_TRANSFORMATION_ARTIFACT_DIR,
                 self.time_stamp
-            )
+            )   #
 
             data_transformation_config_info=self.config_info[DATA_TRANSFORMATION_CONFIG_KEY]
 
@@ -150,14 +152,14 @@ class Configuartion:
                 data_transformation_artifact_dir,
                 data_transformation_config_info[DATA_TRANSFORMATION_PREPROCESSING_DIR_KEY],
                 data_transformation_config_info[DATA_TRANSFORMATION_PREPROCESSED_FILE_NAME_KEY]
-            )
+            )  #'c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_transformation\\preprocessed\\preprocessed.pkl'
 
             
             transformed_train_dir=os.path.join(
             data_transformation_artifact_dir,
             data_transformation_config_info[DATA_TRANSFORMATION_DIR_NAME_KEY],
             data_transformation_config_info[DATA_TRANSFORMATION_TRAIN_DIR_NAME_KEY]
-            )
+            )  # 'c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_transformation\\transformed_data\\train'
 
 
             transformed_test_dir = os.path.join(
@@ -165,7 +167,7 @@ class Configuartion:
             data_transformation_config_info[DATA_TRANSFORMATION_DIR_NAME_KEY],
             data_transformation_config_info[DATA_TRANSFORMATION_TEST_DIR_NAME_KEY]
 
-            )
+            )  # 'c:\\Users\\91822\\Desktop\\git_hub\\Machine-Learning-project-end-to-end\\housing\\artifact\\data_transformation\\transformed_data\\test'
             
 
             data_transformation_config=DataTransformationConfig(
