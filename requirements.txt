@@ -7,4 +7,6 @@ PyYAML
 evidently
 dill
 matplotlib
+
+
 -e .  # this will run the packages in the housing folder .. mandatory when we use setup.py file
